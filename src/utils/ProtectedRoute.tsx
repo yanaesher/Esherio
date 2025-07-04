@@ -1,6 +1,5 @@
 import { type ReactNode } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { LoadingSpinner } from "../components/LoadingSpinner";
 import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
@@ -8,9 +7,7 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, isLoading } = useAuth();
-
-  if (isLoading) return <LoadingSpinner />;
+  const { user } = useAuth();
 
   if (!user) {
     return <Navigate to="/" replace />;

@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Lato&display=swap");
+
 @import "tailwindcss";
 
 @theme {
@@ -12,6 +14,12 @@
 @layer utilities {
   .container {
     @apply w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-pink-400 bg-clip-text text-transparent;
+  }
+  .wrapper {
+    @apply flex flex-col min-h-screen;
   }
 }
 

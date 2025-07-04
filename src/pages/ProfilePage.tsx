@@ -1,3 +1,9 @@
 export function ProfilePage() {
-  return <div>Hello, Eblan</div>;
+  return (
+    <main className="flex-grow pt-16">
+      <div className="container">
+        <div>Hello, Eblan</div>
+      </div>
+    </main>
+  );
 }

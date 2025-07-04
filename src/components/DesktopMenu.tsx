@@ -18,7 +18,9 @@ export function DesktopMenu() {
         <NavLink to="/profile">Profile</NavLink>
       </li>
       <li>
-        <button onClick={signOut}>Sign Out</button>
+        <button className="cursor-pointer" onClick={signOut}>
+          Sign Out
+        </button>
       </li>
     </ul>
   );
