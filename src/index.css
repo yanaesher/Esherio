@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --color-primary: #ff4d4d;
+  --color-primary-hover: #e04343;
+  --color-surface: #e5e5e5;
+  --color-custom-black: #030303;
+}
+
+@layer utilities {
+  .container {
+    @apply w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer components {
+  .inset-button {
+    @apply px-7 py-2 text-sm rounded text-white;
+    box-shadow: inset 0 0 0 1px var(--color-primary);
+  }
+}
+
+@layer base {
+  body {
+    @apply font-roboto;
+  }
+}
