@@ -7,17 +7,10 @@ type AuthFormProps = {
 export function useAuthForm({ onSubmit }: AuthFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrorMsg("");
-    try {
-      await onSubmit(email, password);
-    } catch (err) {
-      if (err instanceof Error) setErrorMsg(err.message);
-      else setErrorMsg("Unknown error occurred");
-    }
+    await onSubmit(email, password);
   };
 
   return {
@@ -25,8 +18,6 @@ export function useAuthForm({ onSubmit }: AuthFormProps) {
     setEmail,
     password,
     setPassword,
-    errorMsg,
-
     handleSubmitForm,
   };
 }

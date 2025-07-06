@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
 import { Users, MessageCircle, PenSquare } from "lucide-react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { FullScreenLoader } from "../components/FullScreenLoader";
 
 export function WelcomePage() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) return <FullScreenLoader />;
+
+  if (user) {
+    return <Navigate to={`/profile/${user.id}`} replace />;
+  }
   return (
     <main>
       <section className="min-h-screen flex items-center justify-center pt-20 pb-10">
         <div className="container flex flex-col md:flex-row items-center gap-12 md:gap-20">
-          {/* Текстовая часть */}
           <div className="md:flex-1 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Welcome to <span className="text-gradient">Esherio</span>
@@ -45,7 +54,7 @@ export function WelcomePage() {
             </Link>
           </div>
 
-          {/* Картинка */}
+          {/* Image*/}
           <div className="md:flex-1 w-full max-w-xl relative">
             <div className="relative w-full aspect-[4/3]">
               <div className="absolute inset-0 bg-primary rounded-2xl" />

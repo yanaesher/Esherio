@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Logo } from "./Logo";
-import { BurgerMenuButton } from "./BurgerMenuButton";
+import { Logo } from "../Logo";
+import { BurgerMenuButton } from "../Menu/BurgerMenuButton";
 
 export function GuestNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,14 +44,12 @@ export function GuestNavbar() {
         >
           <NavLink
             to="/auth?mode=login"
-            onClick={() => setIsOpen(false)}
             className="inset-button px-10 py-4 hover:bg-surface hover:text-black"
           >
             Log In
           </NavLink>
           <NavLink
             to="/auth?mode=register"
-            onClick={() => setIsOpen(false)}
             className="inset-button px-10 py-4 bg-primary hover:text-black hover:bg-surface"
           >
             Join

@@ -6,31 +6,47 @@ import { AuthContext } from "../context/AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = useQueryClient();
-  const { data: user, error } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["auth-session"],
     queryFn: fetchCurrentSession,
     staleTime: 1000 * 60 * 5,
   });
 
-  const signUpWithEmail = async (email: string, password: string) => {
+  const signUpWithEmail = async (
+    nickname: string,
+    email: string,
+    password: string
+  ) => {
+    console.log(nickname);
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          nickname,
+        },
+      },
     });
+
     if (error) throw new Error(error.message);
+
     await queryClient.invalidateQueries({ queryKey: ["auth-session"] });
+
     return {
       message: "Registration successful, please check your email to confirm.",
     };
   };
 
   const signInWithEmail = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) throw new Error(error.message);
     await queryClient.invalidateQueries({ queryKey: ["auth-session"] });
+    return {
+      user: data.user,
+    };
   };
 
   const signOut = async () => {
@@ -42,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     user,
     signUpWithEmail,
     signInWithEmail,
-    error,
+    isLoading,
     signOut,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

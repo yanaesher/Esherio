@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Lato&display=swap");
 
 @import "tailwindcss";
 
@@ -12,14 +11,29 @@
 }
 
 @layer utilities {
+  .main {
+    @apply flex-grow pt-16;
+  }
+
+  .navlink {
+    @apply flex items-center gap-1 transition-all duration-200 border-b-2 border-transparent hover:text-primary;
+  }
+
+  .navlink-active {
+    @apply border-primary text-primary;
+  }
+
   .container {
-    @apply w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8;
   }
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-pink-400 bg-clip-text text-transparent;
   }
   .wrapper {
     @apply flex flex-col min-h-screen;
+  }
+  .mobile-menu-button {
+    @apply flex items-center justify-center gap-2 px-6 py-3 text-lg rounded-md w-[18rem] max-w-[90vw] hover:bg-surface hover:text-black transition-colors;
   }
 }
 

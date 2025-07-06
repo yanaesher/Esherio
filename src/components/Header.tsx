@@ -1,5 +1,5 @@
-import { Navbar } from "./Navbar";
-import { GuestNavbar } from "./GuestNavbar";
+import { Navbar } from "./Navbar/Navbar";
+import { GuestNavbar } from "./Navbar/GuestNavbar";
 import { useAuth } from "../hooks/useAuth";
 
 export function Header() {

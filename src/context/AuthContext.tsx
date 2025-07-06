@@ -3,12 +3,19 @@ import { createContext } from "react";
 
 interface AuthContext {
   user: User | null | undefined;
-  error: unknown;
+  isLoading: boolean;
   signUpWithEmail: (
+    username: string,
     email: string,
     password: string
   ) => Promise<{ message: string }>;
-  signInWithEmail: (email: string, password: string) => Promise<void>;
+
+  signInWithEmail: (
+    email: string,
+    password: string
+  ) => Promise<{
+    user: User;
+  }>;
   signOut: () => Promise<void>;
 }
 

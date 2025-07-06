@@ -1,6 +1,6 @@
-import { DesktopMenu } from "./DesktopMenu";
-import { MobileMenu } from "./MobileMenu";
-import { Logo } from "./Logo";
+import { Logo } from "../Logo";
+import { DesktopMenu } from "../Menu/DesktopMenu";
+import { MobileMenu } from "../Menu/MobileMenu";
 
 export function Navbar() {
   return (
