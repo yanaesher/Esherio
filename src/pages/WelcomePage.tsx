@@ -2,13 +2,17 @@ import { Link } from "react-router-dom";
 import { Users, MessageCircle, PenSquare } from "lucide-react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { FullScreenLoader } from "../components/FullScreenLoader";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 
 export function WelcomePage() {
   const { user, isLoading } = useAuth();
 
-  if (isLoading) return <FullScreenLoader />;
-
+  if (isLoading)
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+        <LoadingSpinner className="w-10 h-10" />
+      </div>
+    );
   if (user) {
     return <Navigate to={`/profile/${user.id}`} replace />;
   }
