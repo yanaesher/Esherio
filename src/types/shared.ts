@@ -1,10 +1,8 @@
 export type Post = {
   id: string;
-  author_id: string | null;
-  title: string | null;
-  content: string | null;
-  image_url: string | null;
-  created_at: string;
+  author_id: string;
+  title: string;
+  content: string;
 };
 
 export type UserProfile = {

@@ -43,7 +43,7 @@ export function ProfileNameEditor({ userId }: ProfileNameEditorProps) {
     <div className="flex items-center gap-4">
       {!isEditing ? (
         <>
-          <h2 className="text-xl font-bold text-gradient">
+          <h2 className="text-4xl font-bold text-gradient">
             {profile?.nickname}
           </h2>
           <button

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { supabase } from "../../supabase-client";
 import type { Post } from "../../types/shared";
 import { useQueryClient } from "@tanstack/react-query";
+import { updatePost } from "../../services/updatePost";
 
 interface PostProps {
   post: Post;
@@ -14,39 +15,38 @@ export function Post({ post }: PostProps) {
   const [editedContent, setEditedContent] = useState(post.content);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const queryClient = useQueryClient();
 
   const handleSave = async () => {
     setIsSaving(true);
-
-    const { error } = await supabase
-      .from("posts")
-      .update({
+    setError(null);
+    try {
+      await updatePost({
+        id: post.id,
         title: editedTitle,
         content: editedContent,
-      })
-      .eq("id", post.id);
-
-    if (error) {
-      console.error("Ошибка обновления поста:", error);
-    } else {
+      });
       setIsEditing(false);
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
+    } catch (err) {
+      setError(`Failed to save post. Please try again : ${err}`);
+    } finally {
+      setIsSaving(false);
     }
-
-    setIsSaving(false);
   };
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this post?")) return;
 
     setIsDeleting(true);
+    setError(null);
 
     const { error } = await supabase.from("posts").delete().eq("id", post.id);
 
     if (error) {
-      console.error("Ошибка удаления поста:", error);
+      setError(`Failed to delete post. Please try again. ${error.message}`);
     } else {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
     }
@@ -91,7 +91,7 @@ export function Post({ post }: PostProps) {
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
           />
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <button
               onClick={handleSave}
               disabled={isSaving}
@@ -99,24 +99,28 @@ export function Post({ post }: PostProps) {
             >
               {isSaving ? "Saving..." : "Save"}
             </button>
+
             <button
               onClick={() => {
                 setIsEditing(false);
                 setEditedTitle(post.title);
                 setEditedContent(post.content);
+                setError(null);
               }}
               className="text-sm text-gray-500 hover:text-gray-700"
             >
               Cancel
             </button>
           </div>
+          {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
         </div>
       ) : (
         <>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
+          <h2 className="text-2xl font-semibold text-primary mb-2">
             {post.title}
           </h2>
-          <p className="text-gray-700 text-sm">{post.content}</p>
+          <p className="text- text-custom-black">{post.content}</p>
+          {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
         </>
       )}
     </div>

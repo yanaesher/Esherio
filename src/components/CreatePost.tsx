@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { supabase } from "../supabase-client";
 import { useAuth } from "../hooks/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
+import { createPost } from "../services/createPost";
 
 export function CreatePost() {
   const { user } = useAuth();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -19,13 +20,11 @@ export function CreatePost() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("posts").insert({
+      await createPost({
         author_id: user.id,
         title,
         content,
       });
-
-      if (error) throw error;
 
       setTitle("");
       setContent("");

@@ -1,4 +1,4 @@
-export function MessagesPage() {
+export function CommunitiesPage() {
   return (
     <main className="main flex items-center justify-center">
       <div className="container text-center">

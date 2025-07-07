@@ -6,6 +6,8 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AuthPage } from "../src/pages/AuthPage";
 import { CreatePostPage } from "./pages/CreatePostPage";
+import { MessagesPage } from "./pages/MessagesPage";
+import { CommunitiesPage } from "./pages/CommunitiesPage";
 
 export function App() {
   return (
@@ -14,22 +16,13 @@ export function App() {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route
-          path="/profile/:id"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/create-post"
-          element={
-            <ProtectedRoute>
-              <CreatePostPage />
-            </ProtectedRoute>
-          }
-        />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/messages/:id" element={<MessagesPage />} />
+          <Route path="/communities" element={<CommunitiesPage />} />
+          <Route path="/create-post" element={<CreatePostPage />} />
+        </Route>
       </Routes>
       <Footer />
     </div>
