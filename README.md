@@ -1,69 +1,45 @@
-# React + TypeScript + Vite
+# ⚛️ Esherio — Minimal Social Space
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Esherio** is a calm and personal social network where you can simply be yourself.
 
-Currently, two official plugins are available:
+Forget about algorithms and noise.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Here, your voice matters — and nothing else.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Try it out and join us here!📍 👉 [Esherio](https://esherio.netlify.app)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 📸 Screenshots
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<!-- Add your screenshots below -->
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+![Screenshot 1](https://i.ibb.co/RkVz4YHc/Screenshot-2025-07-08-201550.png)  
+![Screenshot 2](https://i.ibb.co/N23f0Q8C/Screenshot-2025-07-08-201916.png)
+![Screenshot 3](https://i.ibb.co/3YNkTFpS/Screenshot-2025-07-08-201930.png)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
+## ✨ Features
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 📝 Share your thoughts  
+- 🎨 Customize your profile & avatar  
+- 👀 View posts from others in a clean, distraction-free feed  
+- 🌗 Simple, responsive UI — works on any device
+
+---
+
+### 🛠️ Tech Stack
+
+- ⚛️ React + Vite  
+- 🧾 TypeScript  
+- 🔐 Supabase 
+- 💨 Tailwind CSS
+
+---
+> **Esherio is a small, personal space — not a platform.**  
+> No trends. No followers. Just people.
+
+
+**Made with love**
