@@ -113,10 +113,13 @@ export function Post({ post }: PostProps) {
         </div>
       ) : (
         <>
-          <h2 className="text-2xl text-center font-semibold text-primary mb-4">
+          <h2 className="text-xl sm:text-2xl text-center font-semibold text-primary mb-4 break-words w-full">
             {post.title}
           </h2>
-          <p className="text- text-custom-black">{post.content}</p>
+
+          <p className="text-sm sm:text-base text-custom-black break-words w-full">
+            {post.content}
+          </p>
           {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
         </>
       )}
