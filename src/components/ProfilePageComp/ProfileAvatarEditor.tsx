@@ -4,6 +4,7 @@ import { generateAvatarFilePath } from "../../utils/getAvatarFilePath";
 import { uploadAvatarToStorage } from "../../services/uploadAvatarToStorage";
 import { updateUserAvatarUrl } from "../../services/updateUserAvatarUrl";
 import { getAvatarPublicUrl } from "../../services/getAvatarPublicUrl";
+import { Image } from "lucide-react";
 
 interface AvatarEditorProps {
   userId: string;
@@ -47,23 +48,28 @@ export function AvatarEditor({ userId, avatarUrl }: AvatarEditorProps) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative group w-32 h-32">
       <img
         src={avatarUrl}
         alt="Avatar"
-        className="w-32 h-32 rounded-full object-cover border-4 border-gray-300"
+        className="w-full h-full rounded-full object-cover border-4 border-gray-300 transition-all duration-200 group-hover:brightness-50"
       />
+
+      {/* Hover icon */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <Image className="text-white w-8 h-8" />
+      </div>
 
       <input
         type="file"
         accept="image/*"
         onChange={handleAvatarUpload}
-        className="absolute bottom-0 left-0 text-sm opacity-0 w-full h-full cursor-pointer"
+        className="absolute inset-0 cursor-pointer opacity-0 z-10"
         aria-label="Upload avatar"
       />
 
       {isUploading && (
-        <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-sm text-gray-600">
+        <div className="absolute inset-0 bg-white/70 rounded-full flex items-center justify-center text-sm text-gray-600 z-20">
           Uploading...
         </div>
       )}

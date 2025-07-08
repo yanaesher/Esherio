@@ -1,4 +1,5 @@
 import { usePosts } from "../../hooks/useFetchPosts";
+import { useAuth } from "../../hooks/useAuth";
 
 import { LoadingSpinner } from "../LoadingSpinner";
 import { Post } from "./Post";
@@ -8,6 +9,7 @@ interface PostListProps {
 }
 
 export function PostList({ userId }: PostListProps) {
+  const { user } = useAuth();
   const { data: posts, isLoading, isError, error } = usePosts(userId);
 
   if (isLoading) {
@@ -23,7 +25,12 @@ export function PostList({ userId }: PostListProps) {
   }
 
   if (!posts?.length) {
-    return <p className="text-center">You don't have any posts yet</p>;
+    const message =
+      user?.id === userId
+        ? "You don't have any posts yet"
+        : "The user doesn't have any posts yet";
+
+    return <p className="text-center">{message}</p>;
   }
 
   return (

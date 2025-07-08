@@ -44,9 +44,9 @@ export function MobileMenu() {
             icon={<MessageCircle className="w-5 h-5" />}
           />
           <MobileNavItem
-            to="/communities"
+            to="/users"
             onClick={() => setIsOpen(false)}
-            label="Communities"
+            label="Users"
             icon={<Users className="w-5 h-5" />}
           />
           <MobileNavItem

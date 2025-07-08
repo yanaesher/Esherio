@@ -1,22 +1,26 @@
+import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { PostList } from "../components/ProfilePageComp/PostList";
 import { ProfileNameEditor } from "../components/ProfilePageComp/ProfileNameEditor";
 import { AvatarEditor } from "../components/ProfilePageComp/ProfileAvatarEditor";
+import { ProfileNameDisplay } from "../components/ProfilePageComp/ProfileNameDisplay";
 import { useFetchUserProfile } from "../hooks/useFetchUserProfile";
-
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { Popup } from "../components/Popup";
 
 export function ProfilePage() {
   const { user } = useAuth();
+  const { id } = useParams();
+
+  const userIdToLoad = id || user?.id;
 
   const {
     data: profile,
     isLoading,
     isError,
-  } = useFetchUserProfile(user?.id || "");
+  } = useFetchUserProfile(userIdToLoad || "");
 
-  if (!user) return null;
+  if (!userIdToLoad) return null;
 
   if (isLoading)
     return (
@@ -31,13 +35,18 @@ export function ProfilePage() {
   return (
     <main className="main">
       <div className="container">
-        <div className="flex  gap-10 py-8">
-          <AvatarEditor userId={user.id} avatarUrl={profile.avatar_url} />
-          <ProfileNameEditor userId={user.id} />
+        <div className="flex gap-10 py-8">
+          <AvatarEditor userId={profile.id} avatarUrl={profile.avatar_url} />
+
+          {user?.id === profile.id ? (
+            <ProfileNameEditor userId={profile.id} />
+          ) : (
+            <ProfileNameDisplay nickname={profile.nickname} />
+          )}
         </div>
 
         <div className="py-10">
-          <PostList userId={user.id} />
+          <PostList userId={profile.id} />
         </div>
       </div>
     </main>

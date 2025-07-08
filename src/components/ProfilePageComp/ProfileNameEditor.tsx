@@ -71,7 +71,7 @@ export function ProfileNameEditor({ userId }: ProfileNameEditorProps) {
             className="text-sm text-gray-500"
             onClick={() => {
               setIsEditing(false);
-              setInputValue(profile?.nickname ?? "");
+              setInputValue(profile?.nickname ?? "No name");
             }}
           >
             Cancel
