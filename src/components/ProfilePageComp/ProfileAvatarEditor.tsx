@@ -48,14 +48,12 @@ export function AvatarEditor({ userId, avatarUrl }: AvatarEditorProps) {
   };
 
   return (
-    <div className="relative">
-      <div className="group w-26 sm:w-28 md:w-32 aspect-square">
-        <img
-          src={avatarUrl}
-          alt="MyAvatar"
-          className="w-full h-full rounded-full object-cover border-4 border-gray-300 transition-all duration-200 group-hover:brightness-50"
-        />
-      </div>
+    <div className="relative group w-26 sm:w-28 md:w-32 aspect-square">
+      <img
+        src={avatarUrl}
+        alt="MyAvatar"
+        className="w-full h-full rounded-full object-cover border-4 border-gray-300 transition-all duration-200 group-hover:brightness-50"
+      />
 
       {/* Hover icon */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
