@@ -44,18 +44,15 @@ export function Post({ post }: PostProps) {
     setError(null);
 
     const { error } = await supabase.from("posts").delete().eq("id", post.id);
-
+    await queryClient.invalidateQueries({ queryKey: ["posts"] });
     if (error) {
       setError(`Failed to delete post. Please try again. ${error.message}`);
-    } else {
-      await queryClient.invalidateQueries({ queryKey: ["posts"] });
     }
-
     setIsDeleting(false);
   };
 
   return (
-    <div className="relative max-w-md w-full mx-auto bg-white rounded-xl shadow-md overflow-hidden border mb-6 p-4">
+    <div className="relative w-full bg-white rounded-xl shadow-lg p-4">
       <div className="absolute top-2 right-2 flex items-center gap-2">
         {!isEditing && (
           <>
@@ -64,7 +61,7 @@ export function Post({ post }: PostProps) {
               className="text-gray-500 hover:text-blue-500 transition"
               aria-label="Edit post"
             >
-              <Pencil className="w-4 h-4" />
+              <Pencil className="w-5 h-5" />
             </button>
             <button
               onClick={handleDelete}
@@ -72,7 +69,7 @@ export function Post({ post }: PostProps) {
               className="text-gray-500 hover:text-red-500 transition"
               aria-label="Delete post"
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="w-5 h-5" />
             </button>
           </>
         )}
@@ -116,7 +113,7 @@ export function Post({ post }: PostProps) {
         </div>
       ) : (
         <>
-          <h2 className="text-2xl font-semibold text-primary mb-2">
+          <h2 className="text-2xl text-center font-semibold text-primary mb-4">
             {post.title}
           </h2>
           <p className="text- text-custom-black">{post.content}</p>

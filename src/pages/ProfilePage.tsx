@@ -34,7 +34,7 @@ export function ProfilePage() {
   return (
     <main className="main">
       <div className="container">
-        <div className="flex gap-3 py-8 items-center">
+        <section className="flex gap-3 py-8 items-center">
           {user?.id === profile.id ? (
             <AvatarEditor userId={profile.id} avatarUrl={profile.avatar_url} />
           ) : (
@@ -46,11 +46,11 @@ export function ProfilePage() {
           ) : (
             <ProfileNameDisplay nickname={profile.nickname} />
           )}
-        </div>
+        </section>
 
-        <div className="py-10">
+        <section className="py-10">
           <PostList userId={profile.id} />
-        </div>
+        </section>
       </div>
     </main>
   );

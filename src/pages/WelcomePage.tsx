@@ -11,7 +11,7 @@ export function WelcomePage() {
   }
 
   return (
-    <main>
+    <main className="bg-stone-50">
       <section className="min-h-screen flex items-center justify-center pt-20 pb-10">
         <div className="container flex flex-col md:flex-row items-center gap-12 md:gap-20">
           <div className="md:flex-1 text-center md:text-left">

@@ -34,7 +34,7 @@ export function PostList({ userId }: PostListProps) {
   }
 
   return (
-    <div className="max-w-md mx-auto space-y-6">
+    <div className="max-w-3/6 mx-auto space-y-6 bg-gray-200 p-8 rounded-2xl flex-col gap-5">
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}

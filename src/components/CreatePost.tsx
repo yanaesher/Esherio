@@ -37,7 +37,7 @@ export function CreatePost() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-4 rounded-xl shadow-md space-y-4">
+    <div className="max-w-md mx-auto bg-white p-4 rounded-xl border-2 border-surface shadow-md space-y-4">
       <h2 className="text-xl font-bold">Create Post</h2>
 
       <input

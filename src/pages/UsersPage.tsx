@@ -69,7 +69,13 @@ export function UsersPage() {
 
         <div className="space-y-4 max-w-lg mx-auto">
           {filteredUsers?.length === 0 && (
-            <p className="text-center text-gray-500">No users found.</p>
+            <div className="w-full max-w-xs mx-auto з">
+              <img
+                src="/no-users.png"
+                alt="not found users"
+                className="w-full h-auto object-contain"
+              />
+            </div>
           )}
 
           {filteredUsers?.map((user) => (

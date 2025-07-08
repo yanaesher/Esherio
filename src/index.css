@@ -12,7 +12,7 @@
 
 @layer utilities {
   .main {
-    @apply flex-grow pt-16;
+    @apply flex-grow pt-16 bg-stone-50;
   }
 
   .navlink {
