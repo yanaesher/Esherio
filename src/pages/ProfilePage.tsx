@@ -34,7 +34,7 @@ export function ProfilePage() {
   return (
     <main className="main">
       <div className="container">
-        <div className="flex gap-10 py-8">
+        <div className="flex gap-3 py-8 items-center">
           {user?.id === profile.id ? (
             <AvatarEditor userId={profile.id} avatarUrl={profile.avatar_url} />
           ) : (

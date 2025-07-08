@@ -40,10 +40,10 @@ export function ProfileNameEditor({ userId }: ProfileNameEditorProps) {
     return <Popup className="text-red-500" text={`Error: ${error.message}`} />;
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex gap-2">
       {!isEditing ? (
         <>
-          <h2 className="text-4xl font-bold text-gradient">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">
             {profile?.nickname}
           </h2>
           <button

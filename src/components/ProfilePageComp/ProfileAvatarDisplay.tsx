@@ -1,4 +1,4 @@
-interface ProfileAvatasrDisplayProp {
+interface ProfileAvatarDisplayProp {
   avatarUrl: string;
   alt?: string;
 }
@@ -6,9 +6,9 @@ interface ProfileAvatasrDisplayProp {
 export function ProfileAvatarDisplay({
   avatarUrl,
   alt = "User avatar",
-}: ProfileAvatasrDisplayProp) {
+}: ProfileAvatarDisplayProp) {
   return (
-    <div className="relative w-32 h-32">
+    <div className="relative group w-26 sm:w-28 md:w-32 aspect-square">
       <img
         src={avatarUrl}
         alt={alt}
