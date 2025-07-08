@@ -30,7 +30,7 @@ export function DesktopMenu() {
             icon={<MessageCircle />}
             label="Messages"
           />
-          <MenuItem to="/communities" icon={<Users />} label="Communities" />
+          <MenuItem to="/users" icon={<Users />} label="Users" />
           <MenuItem to="/create-post" icon={<Edit />} label="Create post" />
         </ul>
       </div>

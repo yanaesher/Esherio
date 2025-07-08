@@ -7,6 +7,7 @@ import { ProfileNameDisplay } from "../components/ProfilePageComp/ProfileNameDis
 import { useFetchUserProfile } from "../hooks/useFetchUserProfile";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { Popup } from "../components/Popup";
+import { ProfileAvatarDisplay } from "../components/ProfilePageComp/ProfileAvatarDisplay";
 
 export function ProfilePage() {
   const { user } = useAuth();
@@ -19,8 +20,6 @@ export function ProfilePage() {
     isLoading,
     isError,
   } = useFetchUserProfile(userIdToLoad || "");
-
-  if (!userIdToLoad) return null;
 
   if (isLoading)
     return (
@@ -36,7 +35,11 @@ export function ProfilePage() {
     <main className="main">
       <div className="container">
         <div className="flex gap-10 py-8">
-          <AvatarEditor userId={profile.id} avatarUrl={profile.avatar_url} />
+          {user?.id === profile.id ? (
+            <AvatarEditor userId={profile.id} avatarUrl={profile.avatar_url} />
+          ) : (
+            <ProfileAvatarDisplay avatarUrl={profile.avatar_url} />
+          )}
 
           {user?.id === profile.id ? (
             <ProfileNameEditor userId={profile.id} />

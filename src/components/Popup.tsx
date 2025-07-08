@@ -11,14 +11,18 @@ export function Popup({ text, className = "" }: PopupProps) {
   if (!isVisible) return null;
 
   return (
-    <div className="absolute z-50 bg-primary border rounded shadow-lg p-4 flex flex-col gap-2">
-      <p className={`text-lg font-semibold ${className}`}>{text}</p>
-      <button
-        onClick={() => setIsVisible(false)}
-        className="self-end text-sm text-gray-500 hover:underline"
-      >
-        Ok
-      </button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="bg-primary border rounded shadow-lg p-4 flex flex-col gap-2 max-w-sm w-full mx-4">
+        <p className={`text-lg font-semibold text-white ${className}`}>
+          {text}
+        </p>
+        <button
+          onClick={() => setIsVisible(false)}
+          className="self-end text-sm text-white/70 hover:underline"
+        >
+          Ok
+        </button>
+      </div>
     </div>
   );
 }

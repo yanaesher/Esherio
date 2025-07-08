@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer";
 import { AuthPage } from "../src/pages/AuthPage";
 import { CreatePostPage } from "./pages/CreatePostPage";
 import { MessagesPage } from "./pages/MessagesPage";
+import { UsersPage } from "./pages/UsersPage";
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/messages/:id" element={<MessagesPage />} />
           <Route path="/create-post" element={<CreatePostPage />} />
+          <Route path="/users" element={<UsersPage />} />
         </Route>
       </Routes>
       <Footer />
