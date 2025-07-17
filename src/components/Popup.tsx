@@ -3,10 +3,18 @@ import { useState } from "react";
 interface PopupProps {
   text: string;
   className?: string;
+  onClose?: () => void; // колбек при закрытии
 }
 
-export function Popup({ text, className = "" }: PopupProps) {
+export function Popup({ text, className = "", onClose }: PopupProps) {
   const [isVisible, setIsVisible] = useState(true);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    if (onClose) {
+      onClose();
+    }
+  };
 
   if (!isVisible) return null;
 
@@ -17,7 +25,7 @@ export function Popup({ text, className = "" }: PopupProps) {
           {text}
         </p>
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={handleClose}
           className="self-end text-sm text-white/70 hover:underline"
         >
           Ok

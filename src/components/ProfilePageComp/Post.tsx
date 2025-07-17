@@ -4,12 +4,18 @@ import { supabase } from "../../supabase-client";
 import type { Post } from "../../types/shared";
 import { useQueryClient } from "@tanstack/react-query";
 import { updatePost } from "../../services/updatePost";
+import { useAuth } from "../../hooks/useAuth"; // кастомный хук
 
 interface PostProps {
   post: Post;
 }
 
 export function Post({ post }: PostProps) {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+
+  const isAuthor = user?.id === post.author_id;
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(post.title);
   const [editedContent, setEditedContent] = useState(post.content);
@@ -17,7 +23,12 @@ export function Post({ post }: PostProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const queryClient = useQueryClient();
+  const resetEditState = () => {
+    setIsEditing(false);
+    setEditedTitle(post.title);
+    setEditedContent(post.content);
+    setError(null);
+  };
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -31,7 +42,7 @@ export function Post({ post }: PostProps) {
       setIsEditing(false);
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
     } catch (err) {
-      setError(`Failed to save post. Please try again : ${err}`);
+      setError(`Failed to save post. Please try again: ${err}`);
     } finally {
       setIsSaving(false);
     }
@@ -39,41 +50,40 @@ export function Post({ post }: PostProps) {
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this post?")) return;
-
     setIsDeleting(true);
     setError(null);
 
     const { error } = await supabase.from("posts").delete().eq("id", post.id);
     await queryClient.invalidateQueries({ queryKey: ["posts"] });
+
     if (error) {
-      setError(`Failed to delete post. Please try again. ${error.message}`);
+      setError(`Failed to delete post: ${error.message}`);
     }
+
     setIsDeleting(false);
   };
 
   return (
     <div className="relative w-full bg-white rounded-xl shadow-lg p-4">
-      <div className="absolute top-2 right-2 flex items-center gap-2">
-        {!isEditing && (
-          <>
-            <button
-              onClick={() => setIsEditing(true)}
-              className="text-gray-500 hover:text-blue-500 transition"
-              aria-label="Edit post"
-            >
-              <Pencil className="w-5 h-5" />
-            </button>
-            <button
-              onClick={handleDelete}
-              disabled={isDeleting}
-              className="text-gray-500 hover:text-red-500 transition"
-              aria-label="Delete post"
-            >
-              <Trash2 className="w-5 h-5" />
-            </button>
-          </>
-        )}
-      </div>
+      {isAuthor && !isEditing && (
+        <div className="absolute top-2 right-2 flex items-center gap-2">
+          <button
+            onClick={() => setIsEditing(true)}
+            className="text-gray-500 hover:text-blue-500 transition"
+            aria-label="Edit post"
+          >
+            <Pencil className="w-5 h-5" />
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={isDeleting}
+            className="text-gray-500 hover:text-red-500 transition"
+            aria-label="Delete post"
+          >
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      )}
 
       {isEditing ? (
         <div className="space-y-2">
@@ -96,14 +106,8 @@ export function Post({ post }: PostProps) {
             >
               {isSaving ? "Saving..." : "Save"}
             </button>
-
             <button
-              onClick={() => {
-                setIsEditing(false);
-                setEditedTitle(post.title);
-                setEditedContent(post.content);
-                setError(null);
-              }}
+              onClick={resetEditState}
               className="text-sm text-gray-500 hover:text-gray-700"
             >
               Cancel
@@ -116,7 +120,6 @@ export function Post({ post }: PostProps) {
           <h2 className="text-xl sm:text-2xl text-center font-semibold text-primary mb-4 break-words w-full">
             {post.title}
           </h2>
-
           <p className="text-sm sm:text-base text-custom-black break-words w-full">
             {post.content}
           </p>
